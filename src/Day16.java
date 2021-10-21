@@ -27,6 +27,15 @@ public class Day16 {
 			// "this" is set to the object on the left side
 			//  of the dot(.) when a method call happens
 		}
+		
+		public boolean isExternal() {
+			// is this node a leaf?
+			return (children.isEmpty());
+		}
+		
+		public boolean isInternal() {
+			return (!isExternal());
+		}
 	}
 	
 	public static <E> int depthOfNode(TreeNode<E> node) {
