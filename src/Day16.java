@@ -14,6 +14,12 @@ public class Day16 {
 			this.children = new ArrayList< TreeNode<E> >();
 		}
 		
+//		public TreeNode(E element, TreeNode<E> parent) {
+//			this.element = element;
+//			this.children = new ArrayList< TreeNode<E> >();
+//			parent.addChild(this);
+//		}
+		
 		public void addChild(TreeNode<E> node) {
 			children.add(node);
 			node.parent = this; 
@@ -22,6 +28,18 @@ public class Day16 {
 			//  of the dot(.) when a method call happens
 		}
 	}
+	
+	public static <E> int depthOfNode(TreeNode<E> node) {
+		// count steps up to get the root
+		TreeNode<E> current = node;
+		int count = 0;
+		while (current.parent != null) {
+			count += 1;
+			current = current.parent;
+		}
+		return count;
+	}
+	
 	
 	public static void main(String[] args) {
 		TreeNode<String> root = new TreeNode<String>("Univerities in CA");
@@ -54,6 +72,8 @@ public class Day16 {
 		priv.addChild(small);
 		TreeNode<String> mills = new TreeNode<String>("Mills");
 		small.addChild(mills);
+		
+		System.out.println("Depth of Irvine: " + depthOfNode(irvine));
 	
 	}
 
