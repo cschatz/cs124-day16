@@ -40,6 +40,30 @@ public class Day16 {
 		return count;
 	}
 	
+	public static <E> int height(TreeNode<E> treeRoot) {
+		// This is fundamentally recursive!
+		
+		// base cases
+		if (treeRoot == null) {
+			return -1;
+		}
+		if (treeRoot.children.isEmpty()) {
+			return 0;
+		}
+		
+		// recursive step:
+		// find the maximum height of all child nodes
+		// and add one to that
+		int maxChildHeight = 0;
+		for (TreeNode<E> subtreeRoot : treeRoot.children) {
+			int subtreeHeight = height(subtreeRoot);
+			if (subtreeHeight > maxChildHeight) {
+				maxChildHeight = subtreeHeight;
+			}
+		}
+		return maxChildHeight + 1;
+	}
+	
 	
 	public static void main(String[] args) {
 		TreeNode<String> root = new TreeNode<String>("Univerities in CA");
@@ -58,6 +82,9 @@ public class Day16 {
 		uc.addChild(la);
 		uc.addChild(berkeley);
 		
+		TreeNode<String> env = new TreeNode<String>("College of Environmental Design");
+		berkeley.addChild(env);
+		
 		TreeNode<String> csu = new TreeNode<String>("CSUs");
 		pub.addChild(csu);
 		
@@ -74,7 +101,7 @@ public class Day16 {
 		small.addChild(mills);
 		
 		System.out.println("Depth of Irvine: " + depthOfNode(irvine));
-	
+		System.out.println("Height of whole tree: " + height(root));
 	}
 
 }
